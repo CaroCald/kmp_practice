@@ -1,0 +1,45 @@
+package com.example.kmppractice.core.navigation
+
+import androidx.compose.runtime.Composable
+import com.example.kmppractice.feature.movies.presentation.MovieScreen
+import com.example.kmppractice.feature.movies.presentation.MoviesViewModel
+import moe.tlaster.precompose.koin.koinViewModel
+import moe.tlaster.precompose.navigation.NavHost
+import moe.tlaster.precompose.navigation.Navigator
+
+
+@Composable
+fun Navigation(navigator: Navigator) {
+    val viewModel = koinViewModel(MoviesViewModel::class){ org.koin.core.parameter.parametersOf()}
+
+    NavHost(
+        navigator = navigator,
+        initialRoute = NavigationItem.MovieList.route
+    ) {
+        scene(route = NavigationItem.Splash.route) {
+        }
+
+        scene( route = NavigationItem.Home.route){
+
+        }
+
+        scene( route = NavigationItem.Login.route){
+
+        }
+
+        scene( route = NavigationItem.Profile.route){
+
+        }
+
+        scene( route = NavigationItem.MovieList.route){
+            MovieScreen(
+                navigator , viewModel
+            )
+
+        }
+
+        scene( route = NavigationItem.MovieDetail.route){
+
+        }
+    }
+}

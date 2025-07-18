@@ -9,6 +9,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    kotlin("plugin.serialization") version  "2.1.10"
+
 }
 
 kotlin {
@@ -51,23 +53,60 @@ kotlin {
     }
     
     sourceSets {
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.okhttp)
+
+            //coin
+            implementation(project.dependencies.platform("io.insert-koin:koin-bom:3.5.1"))
+            implementation(libs.koin.core)
+            implementation(libs.koin.android)
+
+            implementation(libs.ktor.client.android)
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)
+            api(compose.foundation)
+            api(compose.animation)
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.ui)
+
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            api(libs.precompose)
+            api(libs.precompose.viewmodel)
+            implementation(compose.components.resources)
+            api(compose.materialIconsExtended)
+            implementation(libs.ktor.client.core)
+            //implementation(libs.kotlinx.coroutines.core)
+
+
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.content.negotation)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
+
+            //coin
+            implementation(project.dependencies.platform("io.insert-koin:koin-bom:4.1.0"))
+            implementation(libs.insert.koin.koin.core)
+            implementation(libs.koin.compose)
+            api(libs.precompose.koin)
+            implementation(libs.ktor.client.logging)
+
+
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }
@@ -97,9 +136,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
 }
 
 dependencies {
     debugImplementation(compose.uiTooling)
 }
 
+
+compose.resources {
+    publicResClass = true // Generates Res class accessible from common code
+    packageOfResClass = "com.example.kmppractice.generated.resources" // Optional: customize package
+    // By default, resources are picked from 'src/commonMain/composeResources'
+    // You can customize this if needed, but the default is usually what you want:
+    // resourcesPath.set(project.layout.projectDirectory.dir("src/commonMain/my-custom-resources"))
+}
