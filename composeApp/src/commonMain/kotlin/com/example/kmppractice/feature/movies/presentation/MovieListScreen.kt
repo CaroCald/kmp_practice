@@ -51,8 +51,8 @@ fun MovieScreen(
                                     .height(300.dp)
                             ) {
                                 AsyncImage(
-                                    model = "https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg",
-                                    //model = Constants.POSTER_IMAGE_BASE_URL + movieList.first().posterPath,
+                                   // model = "https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg",
+                                    model = Constants.POSTER_IMAGE_BASE_URL + movieList.first().posterPath,
                                     contentDescription = "Translated description of what the image contains",
                                     contentScale = ContentScale.FillHeight,
                                     modifier = Modifier

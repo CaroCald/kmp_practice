@@ -17,10 +17,8 @@ import org.koin.compose.KoinContext
 @Preview
 fun App() {
     PreComposeApp{
-        KoinContext{
-            PracticeComposeTheme {
-                MyApp(modifier = Modifier.fillMaxSize())
-            }
+        PracticeComposeTheme {
+            MyApp(modifier = Modifier.fillMaxSize())
         }
     }
 }
