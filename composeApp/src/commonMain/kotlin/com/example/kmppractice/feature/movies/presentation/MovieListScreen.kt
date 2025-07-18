@@ -21,11 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.example.kmppractice.core.base.components.bottomBar.BottomNavigationBar
 import com.example.kmppractice.core.base.components.scaffold.ScaffoldCustom
+import com.example.kmppractice.core.base.components.text.TextCustom
 import com.example.kmppractice.core.navigation.NavigationItem
 import com.example.kmppractice.core.utils.Constants
-import com.example.kmppractice.core.base.components.bottomBar.BottomNavigationBar
-import com.example.kmppractice.core.base.components.text.TextCustom
 import moe.tlaster.precompose.navigation.Navigator
 
 
@@ -51,18 +51,19 @@ fun MovieScreen(
                                     .height(300.dp)
                             ) {
                                 AsyncImage(
-                                   // model = "https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg",
+                                    // model = "https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg",
                                     model = Constants.POSTER_IMAGE_BASE_URL + movieList.first().posterPath,
                                     contentDescription = "Translated description of what the image contains",
                                     contentScale = ContentScale.FillHeight,
                                     modifier = Modifier
                                         .fillMaxHeight()
-                                        .wrapContentWidth()  ,// Center the image horizontally
-                                            onError = { error ->
+                                        .wrapContentWidth(),// Center the image horizontally
+                                    onError = { error ->
                                         // Log the error or display a message
                                         println("Image loading failed: ${error.result.throwable}")
                                     },
-                                )
+
+                                    )
                             }
 
                             LazyVerticalGrid(
@@ -77,6 +78,7 @@ fun MovieScreen(
                                             val path =
                                                 "${NavigationItem.MovieDetail.route}/${items.id}"
                                             navController.navigate(route = path)
+
                                         })
                                 }
                             }
@@ -115,7 +117,6 @@ fun MovieCard(title: String, image: String, onClicked: () -> Unit) {
 fun ImageCard(imgURL: String) {
     Card(
         shape = RoundedCornerShape(20),
-       // border = BorderStroke(width = 2.dp, color = Color.White),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 16.dp
         ),

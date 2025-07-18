@@ -19,7 +19,8 @@ import moe.tlaster.precompose.navigation.Navigator
 fun ToolBarCustom(
     title: String? = null,
     navController: Navigator,
-    hasBackButton: Boolean = false
+    hasBackButton: Boolean = false,
+    onClick: (() -> Unit)? = null
 ){
 
     TopAppBar(
@@ -30,6 +31,7 @@ fun ToolBarCustom(
                         contentColor = Color.White
                     ),
                     onClick = {
+                        onClick?.invoke()
                     navController.popBackStack()
                 }) {
                     Icon(

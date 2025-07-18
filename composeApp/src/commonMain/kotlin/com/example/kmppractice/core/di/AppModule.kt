@@ -24,8 +24,8 @@ fun AppModule() = module {
                 json(Json {
                     prettyPrint = true
                     isLenient = true
-                    ignoreUnknownKeys = true
-                    explicitNulls = false
+                    ignoreUnknownKeys = true // Good practice for robust clients
+                    coerceInputValues = true
                 })
         }
             defaultRequest {

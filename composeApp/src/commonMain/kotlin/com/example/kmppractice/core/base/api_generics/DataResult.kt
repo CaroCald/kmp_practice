@@ -7,6 +7,9 @@ sealed class DataResult<out T> {
     data class Error(val exception: Throwable) : DataResult<Nothing>()
     data class ErrorGeneric<out T>(val data: T?, val exception: String): DataResult<Nothing>()
 
+    data class Initial(val isLoading: Boolean) : DataResult<Nothing>()
+
+
 }
 
 

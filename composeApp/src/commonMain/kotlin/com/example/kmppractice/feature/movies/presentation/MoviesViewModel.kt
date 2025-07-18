@@ -20,17 +20,18 @@ import moe.tlaster.precompose.viewmodel.ViewModel
 import moe.tlaster.precompose.viewmodel.viewModelScope
 
 class MoviesViewModel(private val repository: MovieRepository) : ViewModel() {
-    private val _movieState = MutableStateFlow<DataResult<MovieContent>>(DataResult.Loading(false))
-    private val _movieDetail= MutableStateFlow<DataResult<MovieDetailContent>>(DataResult.Loading(false))
+    private val _movieState = MutableStateFlow<DataResult<MovieContent>>(DataResult.Initial(isLoading = false))
+    private val _movieDetail= MutableStateFlow<DataResult<MovieDetailContent>>(DataResult.Initial(false))
 
     private var movieState: StateFlow<DataResult<MovieContent>> = _movieState.asStateFlow()
     private var movieDetailState: StateFlow<DataResult<MovieDetailContent>> = _movieDetail.asStateFlow()
 
     var apiState by mutableStateOf(GenericApiState())
-
     init {
         fetchMovies()
     }
+
+
     @Composable
     fun EventApi(onSuccess: @Composable () -> Unit, onError: () -> Unit){
         val event by movieState.collectAsState()
@@ -54,7 +55,6 @@ class MoviesViewModel(private val repository: MovieRepository) : ViewModel() {
     fun getResultSMovies(): List<Result>? {
         val moviesState by movieState.collectAsState()
         val valueRsp =  (moviesState as DataResult.Success).data.results
-        print(valueRsp?.get(0)?.posterPath)
         return valueRsp
     }
 
@@ -68,7 +68,6 @@ class MoviesViewModel(private val repository: MovieRepository) : ViewModel() {
         viewModelScope.launch {
             try {
                 _movieState.value=DataResult.Loading(true)
-
                 val expenses = repository.fetchMovies()
                 _movieState.value= DataResult.Success(data = expenses)
 
@@ -79,8 +78,10 @@ class MoviesViewModel(private val repository: MovieRepository) : ViewModel() {
     }
 
     fun getMovieDetail(id:String) {
+        if (_movieDetail.value is DataResult.Success) return // already loaded
         viewModelScope.launch {
             try {
+                _movieDetail.value=DataResult.Loading(true)
                 val expenses = repository.getDetail(id)
                 _movieDetail.value= DataResult.Success(data = expenses)
 
@@ -93,7 +94,12 @@ class MoviesViewModel(private val repository: MovieRepository) : ViewModel() {
 
     fun restoreState() {
         apiState = GenericApiState()
-        movieDetailState= MutableStateFlow<DataResult<MovieDetailContent>>(DataResult.Error(Throwable()))
-        movieState= MutableStateFlow<DataResult<MovieContent>>(DataResult.Error(Throwable()))
+        _movieState.value = DataResult.Initial(false) // or any default state
     }
+
+    fun restoreStateDetail() {
+        apiState = GenericApiState()
+        _movieDetail.value = DataResult.Initial(false) // or any default state
+    }
+
 }

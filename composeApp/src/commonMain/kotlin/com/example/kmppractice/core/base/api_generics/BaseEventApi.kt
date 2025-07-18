@@ -1,4 +1,5 @@
 package com.example.kmppractice.core.base.api_generics
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,12 +20,18 @@ fun <T> baseEventApi(
                 onError(exception)
             }
         }
+
+        is DataResult.Initial -> {
+            apiState.value = apiState.value.copy(isLoading = false, error = Throwable())
+        }
+
         is DataResult.Loading -> {
             val isLoading = event.isLoading
-            if(isLoading){
+            if (isLoading) {
                 apiState.value = apiState.value.copy(isLoading = true, error = Throwable())
             }
         }
+
         is DataResult.Success -> {
             val result = event.data
             apiState.value = apiState.value.copy(isLoading = false)
@@ -32,13 +39,14 @@ fun <T> baseEventApi(
         }
 
         is DataResult.ErrorGeneric<*> -> {
-            val err = event.data
-            val errorMessage =  ""
-            val errorCode =  1
-            apiState.value = apiState.value.copy(isLoading = false, error = CustomError.ServerError(
-                errorMessage,
-                errorCode
-            )
+            //val err = event.data
+            val errorMessage = ""
+            val errorCode = 1
+            apiState.value = apiState.value.copy(
+                isLoading = false, error = CustomError.ServerError(
+                    errorMessage,
+                    errorCode
+                )
             )
         }
 

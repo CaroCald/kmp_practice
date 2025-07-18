@@ -35,6 +35,9 @@ kotlin {
     wasmJs {
         outputModuleName.set("composeApp")
         browser {
+            webpackTask {
+                sourceMaps = true // Or whatever the current property is, might be in `devtool`
+            }
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
             commonWebpackConfig {
@@ -47,6 +50,7 @@ kotlin {
                     }
                 }
             }
+
         }
         binaries.executable()
     }
@@ -59,7 +63,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
 
             //coin
-            implementation(project.dependencies.platform("io.insert-koin:koin-bom:3.5.1"))
+            implementation(project.dependencies.platform("io.insert-koin:koin-bom:4.1.0"))
             implementation(libs.koin.core)
             implementation(libs.koin.android)
 

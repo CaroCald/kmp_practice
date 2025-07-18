@@ -1,11 +1,13 @@
 package com.example.kmppractice.core.navigation
 
 import androidx.compose.runtime.Composable
+import com.example.kmppractice.feature.movies.presentation.MovieDetailScreen
 import com.example.kmppractice.feature.movies.presentation.MovieScreen
 import com.example.kmppractice.feature.movies.presentation.MoviesViewModel
 import moe.tlaster.precompose.koin.koinViewModel
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
+import moe.tlaster.precompose.navigation.path
 
 
 @Composable
@@ -38,7 +40,11 @@ fun Navigation(navigator: Navigator) {
 
         }
 
-        scene( route = NavigationItem.MovieDetail.route){
+        scene( route = NavigationItem.MovieDetail.route+"/{id}"){
+            val idFromPath = it.path<String>("id")
+            idFromPath?.let { id ->
+                MovieDetailScreen(navigator, id, viewModel)
+            }
 
         }
     }

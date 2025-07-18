@@ -46,8 +46,9 @@ fun ScaffoldCustom(
             CustomAlertDialog(
                 shouldShowDialog = shouldShowDialog,
                 onClick = {
+                    shouldShowDialog.value = false
                     onClickError()
-                    shouldShowDialog.value = false },
+                    },
                 message = hasError.message ?: stringResource( resource = Res.string.error_generic)
             )
         }

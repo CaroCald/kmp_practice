@@ -2,6 +2,7 @@ package com.example.kmppractice.feature.movies.data
 
 import com.example.kmppractice.core.base.api_generics.GenericResponse
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 class MovieDetail(
     code: Int? = null,
@@ -9,7 +10,7 @@ class MovieDetail(
     message: String? = null,
     content: MovieDetailContent? = null
 ) : GenericResponse<MovieDetailContent>(code, responseType, message, content)
-
+@Serializable
 data class MovieDetailContent (
     val adult: Boolean = false,
 
@@ -69,7 +70,7 @@ data class MovieDetailContent (
     val voteCount: Long = 0L
 )
 
-
+@Serializable
 data class BelongsToCollection (
     val id: Long = 0L,
     val name: String = "",
@@ -81,13 +82,13 @@ data class BelongsToCollection (
     val backdropPath: String = ""
 )
 
-
+@Serializable
 data class Genre (
     val id: Long = 0L,
     val name: String = ""
 )
 
-
+@Serializable
 data class ProductionCompany (
     val id: Long = 0L,
 
@@ -100,7 +101,7 @@ data class ProductionCompany (
     val originCountry: String = ""
 )
 
-
+@Serializable
 data class ProductionCountry (
     @SerialName("iso_3166_1")
     val iso3166_1: String = "",
@@ -108,7 +109,7 @@ data class ProductionCountry (
     val name: String = ""
 )
 
-
+@Serializable
 data class SpokenLanguage (
     @SerialName("english_name")
     val englishName: String = "",
