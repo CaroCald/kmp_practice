@@ -14,8 +14,11 @@ sealed class DataResult<out T> {
 
 
 sealed class CustomError : Exception() {
-    data class NetworkError(override val message: String, val code: Int) : CustomError()
-    data class ServerError(override val message: String, val code: Int) : CustomError()
-    data class ValidationError(override val message: String, val code: Int) : CustomError()
-    data class UnknownError(override val message: String, val code: Int) : CustomError()
+    data class NetworkError(override val message: String, val code: String) : CustomError()
+    data class ServerError(override val message: String, val code: String) : CustomError()
+    data class ClientError(override val message: String, val code: String) : CustomError()
+    data class ValidationError(override val message: String, val code: String) : CustomError()
+    data class TimeoutError(override val message: String, val code: String) : CustomError()
+    data class RedirectError(override val message: String, val code: String) : CustomError()
+    data class UnknownError(override val message: String, val code: String) : CustomError()
 }
