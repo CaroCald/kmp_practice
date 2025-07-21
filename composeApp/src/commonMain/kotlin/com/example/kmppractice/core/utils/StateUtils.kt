@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
  * Composable extension to collect state and handle API results
  */
 @Composable
-fun <T> collectApiState(
+fun <T> CollectApiState(
     stateFlow: StateFlow<DataResult<T>>,
     onSuccess: @Composable (T) -> Unit,
     onError: @Composable (Throwable) -> Unit = {},

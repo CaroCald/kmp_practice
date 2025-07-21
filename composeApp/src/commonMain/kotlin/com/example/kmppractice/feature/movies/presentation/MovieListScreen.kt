@@ -24,8 +24,7 @@ import com.example.kmppractice.core.base.components.shared.ImageCard
 import com.example.kmppractice.core.base.components.text.TextCustom
 import com.example.kmppractice.core.navigation.NavigationItem
 import com.example.kmppractice.core.utils.Constants
-import com.example.kmppractice.core.utils.collectApiState
-import com.example.kmppractice.feature.movies.data.MovieContent
+import com.example.kmppractice.core.utils.CollectApiState
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
@@ -36,7 +35,7 @@ fun MovieScreen(
     ScaffoldCustom(
         customBottomBar = { BottomNavigationBar(navController) },
         customBody = {
-            collectApiState(
+            CollectApiState(
                 stateFlow = moviesViewModel.moviesState,
                 onSuccess = { movieContent ->
                     val movieList = movieContent.results
@@ -80,12 +79,6 @@ fun MovieScreen(
                             }
                         }
                     }
-                },
-                onError = { exception ->
-                    // Error state is handled by ScaffoldCustom
-                },
-                onLoading = {
-                    // Loading state is handled by ScaffoldCustom
                 }
             )
         },

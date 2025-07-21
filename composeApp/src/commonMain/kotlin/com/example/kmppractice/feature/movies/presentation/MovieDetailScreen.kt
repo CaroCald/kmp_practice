@@ -19,13 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.kmppractice.core.base.api_generics.GenericApiState
 import com.example.kmppractice.core.base.components.scaffold.ScaffoldCustom
 import com.example.kmppractice.core.base.components.shared.ImageCard
 import com.example.kmppractice.core.base.components.text.TextCustom
 import com.example.kmppractice.core.base.components.toolbar.ToolBarCustom
 import com.example.kmppractice.core.utils.Constants
-import com.example.kmppractice.core.utils.collectApiState
+import com.example.kmppractice.core.utils.CollectApiState
 import com.example.kmppractice.feature.movies.data.MovieDetailContent
 import com.example.kmppractice.generated.resources.Res
 import com.example.kmppractice.generated.resources.title_detail
@@ -54,17 +53,11 @@ fun MovieDetailScreen(
             ) 
         },
         customBody = {
-            collectApiState(
+            CollectApiState(
                 stateFlow = moviesViewModel.movieDetailState,
                 onSuccess = { movieDetail ->
                     MovieDetailContent(movieDetail = movieDetail)
                 },
-                onError = { exception ->
-                    // Error state is handled by ScaffoldCustom
-                },
-                onLoading = {
-                    // Loading state is handled by ScaffoldCustom
-                }
             )
         },
         onClickError = {
