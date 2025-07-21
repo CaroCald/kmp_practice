@@ -5,8 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.example.kmppractice.core.base.api_generics.DataResult
 import com.example.kmppractice.core.base.api_generics.GenericApiState
-import com.example.kmppractice.core.utils.ErrorUtils
-import com.example.kmppractice.core.utils.launchApiCall
+import com.example.kmppractice.core.network.launchApiCall
 import com.example.kmppractice.feature.movies.data.MovieContent
 import com.example.kmppractice.feature.movies.data.MovieDetailContent
 import com.example.kmppractice.feature.movies.domain.MovieRepository

@@ -1,7 +1,7 @@
 package com.example.kmppractice.feature.movies.api
 
 import com.example.kmppractice.core.utils.Constants
-import com.example.kmppractice.core.utils.safeApiGet
+import com.example.kmppractice.core.network.safeApiGet
 import com.example.kmppractice.feature.movies.data.MovieDetailContent
 import com.example.kmppractice.feature.movies.domain.MovieRepository
 import com.example.kmppractice.feature.movies.data.MovieContent

@@ -1,10 +1,5 @@
-package com.example.kmppractice.core.utils
+package com.example.kmppractice.core.network
 
-import com.example.kmppractice.core.base.api_generics.DataResult
-import com.example.kmppractice.core.base.api_generics.GenericApiState
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -15,27 +10,6 @@ import io.ktor.client.request.delete
 import io.ktor.client.request.setBody
 import kotlinx.io.IOException
 
-fun <T> CoroutineScope.launchApiCall(
-    stateFlow: MutableStateFlow<DataResult<T>>,
-    apiStateSetter: (GenericApiState) -> Unit,
-    apiCall: suspend () -> T
-) {
-    this.launch {
-        try {
-            stateFlow.value = DataResult.Loading(isLoading = true)
-            apiStateSetter(GenericApiState(isLoading = true))
-
-            val result = apiCall()
-            stateFlow.value = DataResult.Success(result)
-            apiStateSetter(GenericApiState(isLoading = false))
-        } catch (e: Exception) {
-            val errorResult = com.example.kmppractice.core.utils.ErrorUtils.handleException(e)
-            stateFlow.value = errorResult
-            val customError = errorResult.exception
-            apiStateSetter(GenericApiState(isLoading = false, error = customError))
-        }
-    }
-}
 
 suspend inline fun <reified T> safeApiGet(
     httpClient: HttpClient,

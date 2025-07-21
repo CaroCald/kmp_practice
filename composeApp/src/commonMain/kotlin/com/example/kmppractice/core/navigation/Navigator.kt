@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import com.example.kmppractice.feature.movies.presentation.MovieDetailScreen
 import com.example.kmppractice.feature.movies.presentation.MovieScreen
 import com.example.kmppractice.feature.movies.presentation.MoviesViewModel
+import com.example.kmppractice.feature.profile.presentation.ProfileScreen
 import moe.tlaster.precompose.koin.koinViewModel
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
@@ -30,7 +31,7 @@ fun Navigation(navigator: Navigator) {
         }
 
         scene( route = NavigationItem.Profile.route){
-
+            ProfileScreen(navigator)
         }
 
         scene( route = NavigationItem.MovieList.route){

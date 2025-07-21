@@ -10,8 +10,6 @@ import com.example.kmppractice.core.theme.PracticeComposeTheme
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.rememberNavigator
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.KoinContext
-
 
 @Composable
 @Preview
