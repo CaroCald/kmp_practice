@@ -5,6 +5,7 @@ import com.example.kmppractice.feature.movies.presentation.MovieDetailScreen
 import com.example.kmppractice.feature.movies.presentation.MovieScreen
 import com.example.kmppractice.feature.movies.presentation.MoviesViewModel
 import com.example.kmppractice.feature.profile.presentation.ProfileScreen
+import com.example.kmppractice.core.navigation.getMovieListScreenForPlatform
 import moe.tlaster.precompose.koin.koinViewModel
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
@@ -35,10 +36,7 @@ fun Navigation(navigator: Navigator) {
         }
 
         scene( route = NavigationItem.MovieList.route){
-            MovieScreen(
-                navigator , viewModel
-            )
-
+            getMovieListScreenForPlatform(navigator, viewModel).invoke()
         }
 
         scene( route = NavigationItem.MovieDetail.route+"/{id}"){
