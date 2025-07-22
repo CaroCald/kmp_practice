@@ -4,6 +4,7 @@ import com.example.kmppractice.core.utils.Constants
 import com.example.kmppractice.feature.movies.api.MovieRepoIml
 import com.example.kmppractice.feature.movies.domain.MovieRepository
 import com.example.kmppractice.feature.movies.presentation.MoviesViewModel
+import com.example.kmppractice.feature.movies.use_case.MovieUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -55,6 +56,10 @@ fun AppModule() = module {
 
     factory {
         MoviesViewModel(get())
+    }
+
+    factory {
+        MovieUseCase(get())
     }
 }
 

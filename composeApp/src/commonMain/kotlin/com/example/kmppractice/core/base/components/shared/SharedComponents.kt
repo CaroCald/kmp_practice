@@ -9,8 +9,8 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 
 @Composable
 fun ImageCard(
@@ -18,7 +18,7 @@ fun ImageCard(
     contentDescription: String = "Movie poster"
 ) {
     Card(
-        shape = RoundedCornerShape(20),
+        shape = RoundedCornerShape(10),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 16.dp
         ),
@@ -32,6 +32,7 @@ fun ImageCard(
             alignment = Alignment.Center,
             model = imgURL,
             contentDescription = contentDescription
+
         )
     }
 } 
