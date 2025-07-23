@@ -1,10 +1,5 @@
 package com.example.kmppractice.core.di
 
-import com.example.kmppractice.core.utils.Constants
-import com.example.kmppractice.feature.movies.api.MovieRepoIml
-import com.example.kmppractice.feature.movies.domain.MovieRepository
-import com.example.kmppractice.feature.movies.presentation.MoviesViewModel
-import com.example.kmppractice.feature.movies.use_case.MovieUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -49,18 +44,18 @@ fun AppModule() = module {
     }
         }
     }
-
-    single<MovieRepository> {
-        MovieRepoIml(get())
-    }
-
-    factory {
-        MoviesViewModel(get())
-    }
-
-    factory {
-        MovieUseCase(get())
-    }
+//
+//    single<MovieRepository> {
+//        MovieRepoIml(get())
+//    }
+//
+//    factory {
+//        MoviesViewModel(get())
+//    }
+//
+//    factory {
+//        MovieUseCase(get())
+//    }
 }
 
 private fun getApiToken(): String {
